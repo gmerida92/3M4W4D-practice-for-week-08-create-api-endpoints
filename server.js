@@ -54,6 +54,10 @@ const server = http.createServer((req, res) => {
     // GET /dogs
     if (req.method === 'GET' && req.url === '/dogs') {
       // Your code here
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify(dogs));
+      return res.end();
     }
 
     // GET /dogs/:dogId
@@ -62,6 +66,11 @@ const server = http.createServer((req, res) => {
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         // Your code here
+        let dog = dogs.find(dogObj => dogObj.dogId === dogId)
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.write(JSON.stringify(dog));
+        return res.end();
       }
     }
 
